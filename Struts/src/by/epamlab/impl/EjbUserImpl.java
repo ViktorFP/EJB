@@ -29,12 +29,13 @@ public class EjbUserImpl implements IUserDAO {
 			UserSvHome home = (UserSvHome) PortableRemoteObject.narrow(ref, UserSvHome.class);
 			// Create an UserSv object from the Home interface
 			UserSv user = home.create();
-			if (user != null) {
+			String reservationFile = user.getReservation(login, password);
+			if (!reservationFile.isEmpty()) {
 				IReservationDAO reservationDAO = ReservationFactory.getClassFromFactory();
-				return new User(login, reservationDAO.getReservation(user.getReservation(login, password)));
+				return new User(login, reservationDAO.getReservation(reservationFile));
 			}
 		} catch (Exception e) {
-			System.out.println("\nEjbUserImpl > getUser:\n"+e.getMessage()+"\n");
+			System.out.println("\nEjbUserImpl > getUser:\n" + e.getMessage() + "\n");
 		}
 		return null;
 	}
