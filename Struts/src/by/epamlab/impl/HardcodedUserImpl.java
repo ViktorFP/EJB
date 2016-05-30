@@ -13,19 +13,17 @@ import by.epamlab.factories.ReservationFactory;
 
 public class HardcodedUserImpl implements IUserDAO {
 
-	private static Map<String, Map<String, User>> users = new HashMap<>();
+	private static Map<String, Map<String, User>> users = new HashMap<String, Map<String, User>>();
 
 	static {
-		Map<String, User> user = new HashMap<>();
-		IReservationDAO reservationDAO = ReservationFactory
-				.getClassFromFactory();
+		Map<String, User> user = new HashMap<String, User>();
+		IReservationDAO reservationDAO = ReservationFactory.getClassFromFactory();
 		try {
-			user.put(
-					"user",
-					new User("user", reservationDAO
-							.getReservation("0004257753")));
+			user.put("user", new User("user", reservationDAO.getReservation("0004257753")));
 			users.put("user", user);
-		} catch (IOException | SAXException e) {
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (SAXException e) {
 			e.printStackTrace();
 		}
 	}
