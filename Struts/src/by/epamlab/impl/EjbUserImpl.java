@@ -34,7 +34,7 @@ public class EjbUserImpl implements IUserDAO {
 				return new User(login, reservationDAO.getReservation(user.getReservation(login, password)));
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("\nEjbUserImpl > getUser:\n"+e.getMessage()+"\n");
 		}
 		return null;
 	}
