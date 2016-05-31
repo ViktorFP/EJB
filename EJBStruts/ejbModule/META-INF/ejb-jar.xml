@@ -12,6 +12,14 @@
 			<session-type>Stateless</session-type>
 			<transaction-type>Bean</transaction-type>
 		</session>
+		<session>
+			<ejb-name>ReservationSv</ejb-name>
+			<home>by.epamlab.ejbs.ReservationSvHome</home>
+			<remote>by.epamlab.ejbs.ReservationSv</remote>
+			<ejb-class>by.epamlab.ejbs.ReservationSvBean</ejb-class>
+			<session-type>Stateless</session-type>
+			<transaction-type>Bean</transaction-type>
+		</session>
 	</enterprise-beans>
 	<ejb-client-jar>EJBStrutsClient.jar</ejb-client-jar>
 </ejb-jar>

@@ -12,7 +12,7 @@ import javax.ejb.SessionContext;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import by.epamlab.ConstantsSQL;
+import by.epamlab.Constants;
 
 public class UserSvBean implements SessionBean {
 
@@ -29,13 +29,13 @@ public class UserSvBean implements SessionBean {
 			ic = new InitialContext();
 			ds = (DataSource) ic.lookup("java:/SqlDS");
 			con = ds.getConnection();
-			pr = con.prepareStatement(ConstantsSQL.SELECT_LOGIN);
+			pr = con.prepareStatement(Constants.SELECT_LOGIN);
 			pr.setString(1, login);
 			rs = pr.executeQuery();
 			if (rs.next()) {
-				String pass = rs.getString(ConstantsSQL.COLOMN_PASSWORD);
+				String pass = rs.getString(Constants.COLOMN_PASSWORD);
 				if (pass.equals(password)) {
-					reservation = rs.getString(ConstantsSQL.COLOMN_FILE);
+					reservation = rs.getString(Constants.COLOMN_FILE);
 				}
 			}
 

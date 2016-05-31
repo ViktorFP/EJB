@@ -1,6 +1,8 @@
 package by.epamlab;
 
-public class ConstantsSQL {
+public class Constants {
+	//paths
+	public final static String DATA_FOLDER="D:/PVF/EPAM/projectFiles/";
 	// SQL tables
 	private final static String TABLE_USER = "customers";
 	private final static String COLOMN_LOGIN = "login";
