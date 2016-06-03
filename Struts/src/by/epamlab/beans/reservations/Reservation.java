@@ -7,7 +7,7 @@ import by.epamlab.beans.reservations.customer.Customer;
 public class Reservation{
 	private String code;
 	private String description;
-	private List<ResComponent> resComponent;
+	private List<ResComponent> resComponents;
 	private Customer customer;
 	private FareFamily fareFamily;
 
@@ -15,10 +15,10 @@ public class Reservation{
 	}
 
 	public Reservation(String code, String description,
-			List<ResComponent> resComponent) {
+			List<ResComponent> resComponents) {
 		this.code = code;
 		this.description = description;
-		this.resComponent = resComponent;
+		this.resComponents = resComponents;
 	}
 
 	public String getCode() {
@@ -37,12 +37,12 @@ public class Reservation{
 		this.description = description;
 	}
 
-	public List<ResComponent> getResComponent() {
-		return resComponent;
+	public List<ResComponent> getResComponents() {
+		return resComponents;
 	}
 
-	public void setResComponent(List<ResComponent> resComponent) {
-		this.resComponent = resComponent;
+	public void setResComponents(List<ResComponent> resComponents) {
+		this.resComponents = resComponents;
 	}
 
 	public Customer getCustomer() {

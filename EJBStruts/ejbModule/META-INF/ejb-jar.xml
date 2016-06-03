@@ -20,6 +20,14 @@
 			<session-type>Stateless</session-type>
 			<transaction-type>Bean</transaction-type>
 		</session>
+		<session>
+			<ejb-name>ReservationCompSv</ejb-name>
+			<home>by.epamlab.ejbs.ReservationCompSvHome</home>
+			<remote>by.epamlab.ejbs.ReservationCompSv</remote>
+			<ejb-class>by.epamlab.ejbs.ReservationCompSvBean</ejb-class>
+			<session-type>Stateless</session-type>
+			<transaction-type>Bean</transaction-type>
+		</session>
 	</enterprise-beans>
 	<ejb-client-jar>EJBStrutsClient.jar</ejb-client-jar>
 </ejb-jar>

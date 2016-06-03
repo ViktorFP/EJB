@@ -1,6 +1,9 @@
 package by.epamlab;
 
 public class Constants {
+	//xml>string
+	public final static String NAMESPACE="urn:reservation.rqrs.datalex.com";
+	public final static String DELIMITER=";";
 	//paths
 	public final static String DATA_FOLDER="D:/PVF/EPAM/projectFiles/";
 	// SQL tables
