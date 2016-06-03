@@ -1,76 +1,76 @@
-
 body {
-  background-color: #f2f2f2;
-    font-family: "Lato";
-    font-weight: 300;
-    font-size: 16px;
-    color: #555;
-    padding-top: 50px;
-
-    -webkit-font-smoothing: antialiased;
-    -webkit-overflow-scrolling: touch;
+	background-color: #f2f2f2;
+	font-family: "Lato";
+	font-weight: 300;
+	font-size: 16px;
+	color: #555;
+	padding: 50px;
+	text-align: right;
+	-webkit-font-smoothing: antialiased;
+	-webkit-overflow-scrolling: touch;
 }
 
+table {
+	width: 100%
+}
+
+.list{
+	text-align: left
+}
 /* Titles */
-h1, h2, h3, h4, h5, h6 {
-    font-family: "Raleway";
-    font-weight: 300;
-    color: #333;
+h1,h2,h3,h4,h5,h6 {
+	font-family: "Raleway";
+	font-weight: 300;
+	color: #333;
 }
-
 
 /* Paragraph & Typographic */
 p {
-    line-height: 28px;
-    margin-bottom: 25px;
+	line-height: 28px;
+	margin-bottom: 25px;
 }
 
 .centered {
-    text-align: center;
+	text-align: center;
 }
 
 /* Links */
 a {
-    color: #3bc492;
-    word-wrap: break-word;
-
-    -webkit-transition: color 0.1s ease-in, background 0.1s ease-in;
-    -moz-transition: color 0.1s ease-in, background 0.1s ease-in;
-    -ms-transition: color 0.1s ease-in, background 0.1s ease-in;
-    -o-transition: color 0.1s ease-in, background 0.1s ease-in;
-    transition: color 0.1s ease-in, background 0.1s ease-in;
+	color: #3bc492;
+	word-wrap: break-word;
+	-webkit-transition: color 0.1s ease-in, background 0.1s ease-in;
+	-moz-transition: color 0.1s ease-in, background 0.1s ease-in;
+	-ms-transition: color 0.1s ease-in, background 0.1s ease-in;
+	-o-transition: color 0.1s ease-in, background 0.1s ease-in;
+	transition: color 0.1s ease-in, background 0.1s ease-in;
 }
 
-a:hover,
-a:focus {
-    color: #c0392b;
-    text-decoration: none;
-    outline: 0;
+a:hover,a:focus {
+	color: #c0392b;
+	text-decoration: none;
+	outline: 0;
 }
 
-a:before,
-a:after {
-    -webkit-transition: color 0.1s ease-in, background 0.1s ease-in;
-    -moz-transition: color 0.1s ease-in, background 0.1s ease-in;
-    -ms-transition: color 0.1s ease-in, background 0.1s ease-in;
-    -o-transition: color 0.1s ease-in, background 0.1s ease-in;
-    transition: color 0.1s ease-in, background 0.1s ease-in;
+a:before,a:after {
+	-webkit-transition: color 0.1s ease-in, background 0.1s ease-in;
+	-moz-transition: color 0.1s ease-in, background 0.1s ease-in;
+	-ms-transition: color 0.1s ease-in, background 0.1s ease-in;
+	-o-transition: color 0.1s ease-in, background 0.1s ease-in;
+	transition: color 0.1s ease-in, background 0.1s ease-in;
 }
 
- hr {
-    display: block;
-    height: 1px;
-    border: 0;
-    border-top: 1px solid #ccc;
-    margin: 1em 0;
-    padding: 0;
+hr {
+	display: block;
+	height: 1px;
+	border: 0;
+	border-top: 1px solid #ccc;
+	margin: 1em 0;
+	padding: 0;
 }
-
 
 /* ==========================================================================
    Wrap Sections
    ========================================================================== */
-
 #headerwrap {
 	background-color: #34495e;
 	padding-top: 60px;
@@ -80,7 +80,6 @@ a:after {
 	margin-top: 30px;
 	color: white;
 	font-size: 70px;
-	
 }
 
 #headerwrap h3 {
@@ -100,7 +99,6 @@ a:after {
 }
 
 /* intro Wrap */
-
 #intro {
 	padding-top: 50px;
 	border-top: #bdc3c7 solid 5px;
@@ -111,12 +109,11 @@ a:after {
 	padding-bottom: 50px;
 }
 
-#features .ac a{
+#features .ac a {
 	font-size: 20px;
 }
 
 /* Showcase Wrap */
-
 #showcase {
 	display: block;
 	background-color: #34495e;
@@ -147,7 +144,6 @@ a:after {
 }
 
 /* Copyright Wrap */
-
 #c {
 	background: #222222;
 	padding-top: 15px;
@@ -157,4 +153,3 @@ a:after {
 #c p {
 	color: white
 }
-

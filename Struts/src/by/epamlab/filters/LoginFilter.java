@@ -25,13 +25,18 @@ public class LoginFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
 
-		HttpServletRequest httpRequest = (HttpServletRequest) request;
+		HttpServletResponse httpResponse = (HttpServletResponse) response;
+		httpResponse.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+		httpResponse.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+		httpResponse.setDateHeader("Expires", 0); // Proxies.
+	    
+	    HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpSession session = httpRequest.getSession();
 		User user = (User) session.getAttribute(Constants.USER);
-		if (user == null) {
-			session.invalidate();
-			HttpServletResponse httpResponse = (HttpServletResponse) response;
-			httpResponse.sendRedirect("../index.jsp");
+		String uri=httpRequest.getRequestURI();
+		if (user == null && (uri.contains("Tab") || uri.contains("elements"))) {			
+			session.invalidate();			
+			httpResponse.sendRedirect("/Struts/index.jsp");
 			return;
 		}
 		chain.doFilter(request, response);

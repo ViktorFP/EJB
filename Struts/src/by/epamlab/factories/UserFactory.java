@@ -1,11 +1,10 @@
 package by.epamlab.factories;
 
 import by.epamlab.beans.ifaces.IUserDAO;
-import by.epamlab.impl.EjbUserImpl;
+import by.epamlab.impl.HardcodedUserImpl;
 
 public class UserFactory {
 	public static IUserDAO getClassFromFactory() {
-		// return new HardcodedUserImpl();
-		return new EjbUserImpl();
+		return new HardcodedUserImpl();
 	}
 }

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+  "-//Apache Software Foundation//DTD Tiles Configuration 1.1//EN"
+  "http://struts.apache.org/dtds/tiles-config_1_1.dtd">
+<tiles-definitions>
+	<definition name="start" path="/start.jsp">
+		<put name="title" value="" />
+		<put name="footer" value="/elements/footer.jsp" />
+		<put name="content" value="/elements/login.jsp" />
+	</definition>
+
+	<definition name="layout" path="/layout.jsp">
+		<put name="title" value="Struts" />
+		<put name="header" value="/elements/locale.jsp" />
+		<put name="tabs" value="/elements/tabs.jsp" />
+		<put name="footer" value="/elements/footer.jsp" />
+		<put name="content" value="/elements/login.jsp" />
+	</definition>
+	<definition name="reservationPage" extends="layout">
+		<put name="content" value="/elements/reservationPage.jsp" />
+	</definition>
+	<definition name="customerPage" extends="layout">
+		<put name="content" value="/elements/customerPage.jsp" />
+	</definition>
+	<definition name="fareFamilyPage" extends="layout">
+		<put name="content" value="/elements/fareFamilyPage.jsp" />
+	</definition>
+</tiles-definitions>

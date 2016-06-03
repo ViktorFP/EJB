@@ -13,12 +13,18 @@ import by.epamlab.beans.reservations.customer.Payment;
 public class CustomerPaymentsTag extends TagSupport {
 	private static final long serialVersionUID = 1L;
 
+	private String var;
+
+	public void setVar(String var) {
+		this.var = var;
+	}
+	
 	public int doStartTag() throws JspException {
 		User user = (User) pageContext.getAttribute(Constants.USER,
 				PageContext.SESSION_SCOPE);
 		List<Payment> payments = user.getReservation().getCustomer()
 				.getPayments();
-		pageContext.getRequest().setAttribute(Constants.PAYMENTS, payments);
+		pageContext.getRequest().setAttribute(var, payments);
 		return SKIP_BODY;
 	}
 }
