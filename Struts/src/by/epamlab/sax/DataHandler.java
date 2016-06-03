@@ -23,46 +23,60 @@ public class DataHandler extends DefaultHandler {
 	private Customer customer;
 	private FareFamily fareFamily;
 
-	public void startElement(String uri, String localName, String qName, Attributes attrs) throws SAXException {
+	public void startElement(String uri, String localName, String qName,
+			Attributes attrs) throws SAXException {
 		String key = qName.toUpperCase();
 
 		if (DataEnum.names().contains(key)) {
 			switch (DataEnum.valueOf(key)) {
 			case RESERVATION:
-				resComponents = new ArrayList<ResComponent>();
-				final int CODE_IDX = 0, DESCRIPTION_IDX = 1;
-				reservation = new Reservation(attrs.getValue(CODE_IDX), attrs.getValue(DESCRIPTION_IDX), resComponents);
+				resComponents = new ArrayList<>();
+				final int CODE_IDX = 0,
+				DESCRIPTION_IDX = 1;
+				reservation = new Reservation(attrs.getValue(CODE_IDX),
+						attrs.getValue(DESCRIPTION_IDX), resComponents);
 				break;
 			case RESCOMPONENT:
 				resComponents
-						.add(new ResComponent(attrs.getValue("ComponentTypeCode"), attrs.getValue("CreateDateTime"),
-								attrs.getValue("InternalStatus"), attrs.getValue("Sequence")));
+						.add(new ResComponent(attrs
+								.getValue("ComponentTypeCode"), attrs
+								.getValue("CreateDateTime"), attrs
+								.getValue("InternalStatus"), attrs
+								.getValue("Sequence")));
 				break;
 			case CUSTOMER:
-				customer = new Customer(attrs.getValue("CustomerDocID"), attrs.getValue("FirstName"),
+				customer = new Customer(attrs.getValue("CustomerDocID"),
+						attrs.getValue("FirstName"),
 						attrs.getValue("LastName"), attrs.getValue("Sequence"));
 				reservation.setCustomer(customer);
 				break;
 			case PAYMENT:
-				customer.getPayments().add(new Payment(attrs.getValue("AmountPaid"),
-						attrs.getValue("FormOfPaymentTypeCode"), attrs.getValue("CurrencyCode")));
+				customer.getPayments().add(
+						new Payment(attrs.getValue("AmountPaid"), attrs
+								.getValue("FormOfPaymentTypeCode"), attrs
+								.getValue("CurrencyCode")));
 				break;
 			case EMAIL:
-				customer.setEmail(new Email(attrs.getValue("Default"), attrs.getValue("EmailAddress"),
-						attrs.getValue("EmailType"), attrs.getValue("Sequence"),
-						Enum.valueOf(Status.class, attrs.getValue("SyncStatus"))));
+				customer.setEmail(new Email(attrs.getValue("Default"), attrs
+						.getValue("EmailAddress"), attrs.getValue("EmailType"),
+						attrs.getValue("Sequence"), Enum.valueOf(Status.class,
+								attrs.getValue("SyncStatus"))));
 				break;
 			case PHONE:
-				customer.setPhone(new Phone(attrs.getValue("Default"), attrs.getValue("PhoneNumber"),
-						attrs.getValue("PhoneType"), attrs.getValue("Sequence"), attrs.getValue("SyncStatus")));
+				customer.setPhone(new Phone(attrs.getValue("Default"), attrs
+						.getValue("PhoneNumber"), attrs.getValue("PhoneType"),
+						attrs.getValue("Sequence"), attrs
+								.getValue("SyncStatus")));
 				break;
 			case FAREFAMILY:
-				fareFamily = new FareFamily(attrs.getValue("FareFamilyCode"), new ArrayList<AncillaryAirComponent>());
+				fareFamily = new FareFamily(attrs.getValue("FareFamilyCode"),
+						new ArrayList<AncillaryAirComponent>());
 				reservation.setFareFamily(fareFamily);
 				break;
 			case ANCILLARYAIRCOMPONENT:
-				fareFamily.getAncillaryAirComponent()
-						.add(new AncillaryAirComponent(attrs.getValue("AncillaryAirComponentCode")));
+				fareFamily.getAncillaryAirComponent().add(
+						new AncillaryAirComponent(attrs
+								.getValue("AncillaryAirComponentCode")));
 				break;
 			}
 		}
@@ -75,7 +89,7 @@ public class DataHandler extends DefaultHandler {
 
 		public static List<String> names() {
 			if (names == null) {
-				names = new ArrayList<String>();
+				names = new ArrayList<>();
 				for (DataEnum data : DataEnum.values()) {
 					names.add(data.name());
 				}

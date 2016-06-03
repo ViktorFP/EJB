@@ -3,14 +3,14 @@
 	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	id="WebApp_ID" version="2.5">
-	<display-name>Struts</display-name>
+	<display-name>StrutsApp</display-name>
 	<filter>
 		<filter-name>LoginFilter</filter-name>
 		<filter-class>by.epamlab.filters.LoginFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>LoginFilter</filter-name>
-		<url-pattern>/elements/*</url-pattern>
+		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	<servlet>
 		<servlet-name>action</servlet-name>
@@ -19,6 +19,12 @@
 			<param-name>config</param-name>
 			<param-value>
           /WEB-INF/struts-config.xml
+       </param-value>
+		</init-param>
+		<init-param>
+			<param-name>chainConfig</param-name>
+			<param-value>
+           org/apache/struts/tiles/chain-config.xml
        </param-value>
 		</init-param>
 		<load-on-startup>2</load-on-startup>

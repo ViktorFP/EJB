@@ -4,9 +4,10 @@ public class Payment {
 	private int amountPaid;
 	private String formOfPaymentTypeCode;
 	private String currencyCode;
-	
-	public Payment() {}
-	
+
+	public Payment() {
+	}
+
 	public Payment(String amountPaid, String formOfPaymentTypeCode,
 			String currencyCode) {
 		setAmountPaid(Double.parseDouble(amountPaid));
@@ -15,11 +16,11 @@ public class Payment {
 	}
 
 	public double getAmountPaid() {
-		return amountPaid/100;
+		return amountPaid / 100;
 	}
 
 	public void setAmountPaid(double amountPaid) {
-		this.amountPaid = (int)(amountPaid*100);
+		this.amountPaid = (int) (amountPaid * 100);
 	}
 
 	public String getFormOfPaymentTypeCode() {
@@ -37,13 +38,5 @@ public class Payment {
 	public void setCurrencyCode(String currencyCode) {
 		this.currencyCode = currencyCode;
 	}
-//////////////////////////////////////
-	@Override
-	public String toString() {
-		return "Payment [amountPaid=" + getAmountPaid() + ", formOfPaymentTypeCode="
-				+ formOfPaymentTypeCode + ", currencyCode=" + currencyCode
-				+ "]";
-	}
-	
-	
+
 }
