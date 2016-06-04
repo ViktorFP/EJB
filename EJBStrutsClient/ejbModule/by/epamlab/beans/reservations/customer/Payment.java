@@ -1,6 +1,9 @@
 package by.epamlab.beans.reservations.customer;
 
-public class Payment {
+import java.io.Serializable;
+
+public class Payment implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private int amountPaid;
 	private String formOfPaymentTypeCode;
 	private String currencyCode;
@@ -8,8 +11,7 @@ public class Payment {
 	public Payment() {
 	}
 
-	public Payment(String amountPaid, String formOfPaymentTypeCode,
-			String currencyCode) {
+	public Payment(String amountPaid, String formOfPaymentTypeCode, String currencyCode) {
 		setAmountPaid(Double.parseDouble(amountPaid));
 		this.formOfPaymentTypeCode = formOfPaymentTypeCode;
 		this.currencyCode = currencyCode;

@@ -1,14 +1,16 @@
 package by.epamlab.beans.reservations.customer;
 
-public class Email {
+import java.io.Serializable;
+
+public class Email implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private boolean isDefault;
 	private String emailAddress;
 	private String emailType;
 	private int sequence;
 	private Status syncStatus;
 
-	public Email() {
-		
+	public Email() {		
 	}
 
 	public Email(String isDefault, String emailAddress, String emailType,

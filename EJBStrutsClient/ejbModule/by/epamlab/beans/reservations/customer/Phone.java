@@ -1,6 +1,9 @@
 package by.epamlab.beans.reservations.customer;
 
-public class Phone {
+import java.io.Serializable;
+
+public class Phone implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private boolean isDefault;
 	private String phoneNumber;
 	private String phoneType;

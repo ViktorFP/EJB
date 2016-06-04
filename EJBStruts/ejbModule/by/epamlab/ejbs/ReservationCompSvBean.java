@@ -9,12 +9,11 @@ import javax.ejb.EJBException;
 import javax.ejb.SessionBean;
 import javax.ejb.SessionContext;
 
-import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.Namespace;
-import org.jdom2.input.SAXBuilder;
 
 import by.epamlab.Constants;
+import by.epamlab.Utilites;
 import by.epamlab.beans.reservations.ResComponent;
 
 public class ReservationCompSvBean implements SessionBean {
@@ -31,10 +30,8 @@ public class ReservationCompSvBean implements SessionBean {
 
 	private ArrayList<ResComponent> getDataComponents(String code, String componentTypeCode, File file) {
 		ArrayList<ResComponent> components = new ArrayList<>();
-		try {
-			SAXBuilder builder = new SAXBuilder();
-			Document document = builder.build(file);
-			Element root = document.getRootElement();
+		try {			
+			Element root = Utilites.getRoot(file);
 			if (root.getAttributeValue("Code").equals(code)) {
 				List<Element> list = root.getChildren("ResComponent", Namespace.getNamespace(Constants.NAMESPACE));
 				for (Element e : list) {

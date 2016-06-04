@@ -28,6 +28,14 @@
 			<session-type>Stateless</session-type>
 			<transaction-type>Bean</transaction-type>
 		</session>
+		<session>
+			<ejb-name>CustomerSv</ejb-name>
+			<home>by.epamlab.ejbs.CustomerSvHome</home>
+			<remote>by.epamlab.ejbs.CustomerSv</remote>
+			<ejb-class>by.epamlab.ejbs.CustomerSvBean</ejb-class>
+			<session-type>Stateless</session-type>
+			<transaction-type>Bean</transaction-type>
+		</session>
 	</enterprise-beans>
 	<ejb-client-jar>EJBStrutsClient.jar</ejb-client-jar>
 </ejb-jar>

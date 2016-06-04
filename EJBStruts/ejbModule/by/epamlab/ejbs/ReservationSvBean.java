@@ -8,12 +8,10 @@ import javax.ejb.EJBException;
 import javax.ejb.SessionBean;
 import javax.ejb.SessionContext;
 
-import org.jdom2.Document;
-import org.jdom2.Element;
 import org.jdom2.JDOMException;
-import org.jdom2.input.SAXBuilder;
 
 import by.epamlab.Constants;
+import by.epamlab.Utilites;
 
 public class ReservationSvBean implements SessionBean {
 
@@ -50,10 +48,7 @@ public class ReservationSvBean implements SessionBean {
 	}
 
 	private String getAttributeValue(File file, String attr) throws JDOMException, IOException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(file);
-		Element root = document.getRootElement();
-		return root.getAttributeValue(attr);
+		return Utilites.getRoot(file).getAttributeValue(attr);
 	}
 
 	public void ejbCreate() throws EJBException {
