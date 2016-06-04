@@ -2,11 +2,14 @@ package by.epamlab.ejbs;
 
 import java.io.File;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 import javax.ejb.EJBObject;
 
-public interface ReservationCompSv extends EJBObject {
-	String getReservationComponents(String code, File file) throws RemoteException;
+import by.epamlab.beans.reservations.ResComponent;
 
-	String getReservationComponents(String code, String componentTypeCode, File file) throws RemoteException;
+public interface ReservationCompSv extends EJBObject {
+	ArrayList<ResComponent> getReservationComponents(String code, File file) throws RemoteException;
+
+	ArrayList<ResComponent> getReservationComponents(String code, String componentTypeCode, File file) throws RemoteException;
 }

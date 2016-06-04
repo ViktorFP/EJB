@@ -1,7 +1,6 @@
 package by.epamlab.beans.reservations;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.naming.InitialContext;
@@ -64,24 +63,15 @@ public class EjbReservation extends Reservation {
 		List<ResComponent> resComponents = super.getResComponents();
 		try {
 			if (resComponents == null) {
-				resComponents = new ArrayList<ResComponent>();
 				InitialContext jndiContext = PropertiesUtil.getInitialContext();
 				Object ref = jndiContext.lookup("ReservationCompSv");
 				ReservationCompSvHome home = (ReservationCompSvHome) PortableRemoteObject.narrow(ref,
 						ReservationCompSvHome.class);
 				ReservationCompSv components = home.create();
-				String componentsData = "";
 				if (componentTypeCode == null) {
-					componentsData = components.getReservationComponents(code, file);
+					resComponents = components.getReservationComponents(code, file);
 				} else {
-					componentsData = components.getReservationComponents(code, componentTypeCode, file);
-				}
-				if (!componentsData.isEmpty()) {
-					String[] componentsS = componentsData.split(";");
-					for (int i = 0; i < componentsS.length;) {
-						resComponents.add(new ResComponent(componentsS[i++], componentsS[i++], componentsS[i++],
-								componentsS[i++]));
-					}
+					resComponents = components.getReservationComponents(code, componentTypeCode, file);
 				}
 			}
 		} catch (Exception e) {

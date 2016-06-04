@@ -1,6 +1,9 @@
 package by.epamlab.beans.reservations;
 
-public class ResComponent {
+import java.io.Serializable;
+
+public class ResComponent implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private String componentTypeCode;
 	private String createDateTime;
 	private String internalStatus;

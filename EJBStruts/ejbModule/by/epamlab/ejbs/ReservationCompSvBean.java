@@ -2,6 +2,7 @@ package by.epamlab.ejbs;
 
 import java.io.File;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJBException;
@@ -14,38 +15,37 @@ import org.jdom2.Namespace;
 import org.jdom2.input.SAXBuilder;
 
 import by.epamlab.Constants;
+import by.epamlab.beans.reservations.ResComponent;
 
 public class ReservationCompSvBean implements SessionBean {
 
 	private static final long serialVersionUID = 1L;
 
-	public String getReservationComponents(String code, File file) {
+	public ArrayList<ResComponent> getReservationComponents(String code, File file) {
 		return getDataComponents(code, null, file);
 	}
 
-	public String getReservationComponents(String code, String componentTypeCode, File file) {
+	public ArrayList<ResComponent> getReservationComponents(String code, String componentTypeCode, File file) {
 		return getDataComponents(code, componentTypeCode, file);
 	}
 
-	private String getDataComponents(String code, String componentTypeCode, File file) {
-		String components = "";
+	private ArrayList<ResComponent> getDataComponents(String code, String componentTypeCode, File file) {
+		ArrayList<ResComponent> components = new ArrayList<>();
 		try {
 			SAXBuilder builder = new SAXBuilder();
 			Document document = builder.build(file);
 			Element root = document.getRootElement();
 			if (root.getAttributeValue("Code").equals(code)) {
 				List<Element> list = root.getChildren("ResComponent", Namespace.getNamespace(Constants.NAMESPACE));
-				StringBuilder sb = new StringBuilder();
 				for (Element e : list) {
 					if (componentTypeCode == null) {
-						addComponent(e, sb);
+						addComponent(components, e);
 					} else {
 						if (e.getAttributeValue("ComponentTypeCode").equals(componentTypeCode)) {
-							addComponent(e, sb);
+							addComponent(components, e);
 						}
 					}
 				}
-				components = sb.toString();
 			}
 		} catch (Exception e) {
 			System.out
@@ -54,10 +54,9 @@ public class ReservationCompSvBean implements SessionBean {
 		return components;
 	}
 
-	private void addComponent(Element e, StringBuilder sb) {
-		sb.append(e.getAttributeValue("ComponentTypeCode") + Constants.DELIMITER + e.getAttributeValue("CreateDateTime")
-				+ Constants.DELIMITER + e.getAttributeValue("InternalStatus") + Constants.DELIMITER
-				+ e.getAttributeValue("Sequence") + Constants.DELIMITER);
+	private void addComponent(List<ResComponent> components, Element e) {
+		components.add(new ResComponent(e.getAttributeValue("ComponentTypeCode"), e.getAttributeValue("CreateDateTime"),
+				e.getAttributeValue("InternalStatus"), e.getAttributeValue("Sequence")));
 	}
 
 	public void ejbCreate() throws EJBException {
