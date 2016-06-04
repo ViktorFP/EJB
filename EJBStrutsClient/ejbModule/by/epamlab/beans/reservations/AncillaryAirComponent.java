@@ -1,6 +1,9 @@
 package by.epamlab.beans.reservations;
 
-public class AncillaryAirComponent {
+import java.io.Serializable;
+
+public class AncillaryAirComponent implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private String ancillaryAirComponentCode;
 
 	public AncillaryAirComponent() {

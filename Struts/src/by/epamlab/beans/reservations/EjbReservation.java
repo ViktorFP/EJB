@@ -9,6 +9,8 @@ import javax.rmi.PortableRemoteObject;
 import by.epamlab.beans.reservations.customer.Customer;
 import by.epamlab.ejbs.CustomerSv;
 import by.epamlab.ejbs.CustomerSvHome;
+import by.epamlab.ejbs.FareFamilySv;
+import by.epamlab.ejbs.FareFamilySvHome;
 import by.epamlab.ejbs.ReservationCompSv;
 import by.epamlab.ejbs.ReservationCompSvHome;
 import by.epamlab.utilites.PropertiesUtil;
@@ -30,6 +32,24 @@ public class EjbReservation extends Reservation {
 
 	public void setFile(File file) {
 		this.file = file;
+	}
+
+	@Override
+	public FareFamily getFareFamily() {
+		FareFamily fareFamily = super.getFareFamily();
+		if (fareFamily == null) {
+			try {
+				InitialContext jndiContext = PropertiesUtil.getInitialContext();
+				Object ref = jndiContext.lookup("FareFamilySv");
+				FareFamilySvHome home = (FareFamilySvHome) PortableRemoteObject.narrow(ref, FareFamilySvHome.class);
+				FareFamilySv fareFamilySv = home.create();
+				fareFamily = fareFamilySv.getFareFamily(file);
+			} catch (Exception e) {
+				System.out.println(
+						">>>>>>>>>>>ERROR>>>>>>>>>>>>\nEjbReservation > getFareFamily():\n" + e.getMessage() + "\n");
+			}
+		}
+		return fareFamily;
 	}
 
 	@Override
