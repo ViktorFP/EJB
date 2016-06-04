@@ -20,6 +20,14 @@ public class ReservationCompSvBean implements SessionBean {
 	private static final long serialVersionUID = 1L;
 
 	public String getReservationComponents(String code, File file) {
+		return getDataComponents(code, null, file);
+	}
+
+	public String getReservationComponents(String code, String componentTypeCode, File file) {
+		return getDataComponents(code, componentTypeCode, file);
+	}
+
+	private String getDataComponents(String code, String componentTypeCode, File file) {
 		String components = "";
 		try {
 			SAXBuilder builder = new SAXBuilder();
@@ -29,25 +37,27 @@ public class ReservationCompSvBean implements SessionBean {
 				List<Element> list = root.getChildren("ResComponent", Namespace.getNamespace(Constants.NAMESPACE));
 				StringBuilder sb = new StringBuilder();
 				for (Element e : list) {
-					sb.append(e.getAttributeValue("ComponentTypeCode") + Constants.DELIMITER
-							+ e.getAttributeValue("CreateDateTime") + Constants.DELIMITER
-							+ e.getAttributeValue("InternalStatus") + Constants.DELIMITER
-							+ e.getAttributeValue("Sequence") + Constants.DELIMITER);
+					if (componentTypeCode == null) {
+						addComponent(e, sb);
+					} else {
+						if (e.getAttributeValue("ComponentTypeCode").equals(componentTypeCode)) {
+							addComponent(e, sb);
+						}
+					}
 				}
-				components = sb.toString();				
+				components = sb.toString();
 			}
 		} catch (Exception e) {
-			System.out.println(
-					">>>>>>>ERROR>>>>>>\nReservationCompSvBean: getReservationComponents\n" + e.getMessage() + "\n");
+			System.out
+					.println(">>>>>>>ERROR>>>>>>\nReservationCompSvBean: getDataComponents\n" + e.getMessage() + "\n");
 		}
 		return components;
 	}
 
-	public String getReservationComponents(String code, String componentTypeCode, File file) {
-		String components = "";
-		// сформировать строку с разделителем
-		// ;//////////////////////////////////////////////////////
-		return components;
+	private void addComponent(Element e, StringBuilder sb) {
+		sb.append(e.getAttributeValue("ComponentTypeCode") + Constants.DELIMITER + e.getAttributeValue("CreateDateTime")
+				+ Constants.DELIMITER + e.getAttributeValue("InternalStatus") + Constants.DELIMITER
+				+ e.getAttributeValue("Sequence") + Constants.DELIMITER);
 	}
 
 	public void ejbCreate() throws EJBException {

@@ -1,5 +1,6 @@
 package by.epamlab.beans.reservations;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import by.epamlab.beans.reservations.customer.Customer;
@@ -39,6 +40,18 @@ public class Reservation{
 
 	public List<ResComponent> getResComponents() {
 		return resComponents;
+	}
+	
+	public List<ResComponent> getResComponents(String code, String componentTypeCode) {
+		List<ResComponent>components=new ArrayList<ResComponent>();
+		if(this.code.equals(code)){
+			for(ResComponent c:resComponents){
+				if(c.getComponentTypeCode().equals(componentTypeCode)){
+					components.add(c);
+				}
+			}
+		}
+		return components;
 	}
 
 	public void setResComponents(List<ResComponent> resComponents) {
