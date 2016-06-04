@@ -30,7 +30,7 @@ public class DataHandler extends DefaultHandler {
 		if (DataEnum.names().contains(key)) {
 			switch (DataEnum.valueOf(key)) {
 			case RESERVATION:
-				resComponents = new ArrayList<>();
+				resComponents = new ArrayList<ResComponent>();
 				final int CODE_IDX = 0,
 				DESCRIPTION_IDX = 1;
 				reservation = new Reservation(attrs.getValue(CODE_IDX),
@@ -89,7 +89,7 @@ public class DataHandler extends DefaultHandler {
 
 		public static List<String> names() {
 			if (names == null) {
-				names = new ArrayList<>();
+				names = new ArrayList<String>();
 				for (DataEnum data : DataEnum.values()) {
 					names.add(data.name());
 				}

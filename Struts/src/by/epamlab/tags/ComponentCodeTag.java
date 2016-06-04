@@ -21,13 +21,8 @@ public class ComponentCodeTag extends TagSupport {
 	public int doStartTag() throws JspException {
 		User user = (User) pageContext.getAttribute(Constants.USER,
 				PageContext.SESSION_SCOPE);
-<<<<<<< HEAD
-		List<ResComponent> list = user.getReservation().getResComponents();
-		pageContext.getRequest().setAttribute(Constants.COMPONENTS, list);
-=======
-		List<ResComponent> components = user.getReservation().getResComponent();
+		List<ResComponent> components = user.getReservation().getResComponents();
 		pageContext.getRequest().setAttribute(var, components);
->>>>>>> master2
 		return SKIP_BODY;
 	}
 }
