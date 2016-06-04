@@ -14,8 +14,8 @@ public class CustomerSvBean implements SessionBean {
 	private static final long serialVersionUID = 1L;
 
 	public Customer getCustomer(File file){
-		
-		return reservation;
+		///////////////////////////////////////////////////////
+		return null;
 	}
 
 	public void ejbCreate() throws EJBException {
