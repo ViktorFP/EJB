@@ -1,32 +1,61 @@
 package by.epamlab;
 
-import java.util.Properties;
-
 import javax.ejb.EJBException;
 import javax.ejb.MessageDrivenBean;
 import javax.ejb.MessageDrivenContext;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
-import javax.jms.Session;
+import javax.jms.QueueConnection;
+import javax.jms.QueueConnectionFactory;
+import javax.jms.QueueSession;
 import javax.jms.TextMessage;
-import javax.jms.Topic;
-import javax.jms.TopicConnection;
-import javax.jms.TopicConnectionFactory;
-import javax.jms.TopicSession;
-import javax.jms.TopicSubscriber;
-import javax.naming.Context;
 import javax.naming.InitialContext;
-import javax.naming.NamingException;
 
 public class Messenger implements MessageDrivenBean, MessageListener {
 
-	private TopicConnection connect;
-	private TopicSession session;
 	private static final long serialVersionUID = 1L;
+	MessageDrivenContext context = null;
+	QueueConnection connection;
+	QueueSession session;
 
-	@Override
+	public Messenger() {
+		System.out.println("Constructing MyMDB");
+	}
+
+	public void setMessageDrivenContext(MessageDrivenContext context) {
+		this.context = context;
+		System.out.println("setMessageDrivenContext");
+	}
+
+	public void ejbCreate() throws EJBException {
+		System.out.println("ejbCreate");
+		try {
+			InitialContext initContext = new InitialContext();
+			QueueConnectionFactory qcf = (QueueConnectionFactory) initContext.lookup("java:comp/env/jms/QCF");
+			connection = qcf.createQueueConnection();
+			session = connection.createQueueSession(false, QueueSession.AUTO_ACKNOWLEDGE);
+			connection.start();
+		} catch (Exception e) {
+			throw new EJBException("Failed to initialize MyMDB", e);
+		}
+	}
+
+	public void ejbRemove() {
+		System.out.println("ejbRemove");
+		context = null;
+		try {
+			if (session != null)
+				session.close();
+			if (connection != null)
+				connection.close();
+		} catch (JMSException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public void onMessage(Message message) {
+		System.out.println("onMessage");
 		try {
 			TextMessage textMsg = (TextMessage) message;
 			String text = textMsg.getText();
@@ -34,46 +63,5 @@ public class Messenger implements MessageDrivenBean, MessageListener {
 		} catch (JMSException jmsE) {
 			jmsE.printStackTrace();
 		}
-	}
-
-	private static InitialContext getInitialContext() throws NamingException {
-		Properties env = new Properties();
-		env.put(Context.INITIAL_CONTEXT_FACTORY, "org.jnp.interfaces.NamingContextFactory");
-		env.put(Context.URL_PKG_PREFIXES, "org.jboss.naming:org.jnp.interfaces");
-		env.put(Context.PROVIDER_URL, "jnp://localhost:1099");
-		return new InitialContext(env);
-	}
-
-	public void ejbCreate() throws EJBException {
-		try {
-			InitialContext jndiContext = getInitialContext();
-			TopicConnectionFactory factory = (TopicConnectionFactory) jndiContext
-					.lookup("java:comp/env/jms/TopicFactory");
-			Topic topic = (Topic) jndiContext.lookup("java:comp/env/jms/MsgTopic");
-			connect = factory.createTopicConnection();
-			session = connect.createTopicSession(false, Session.AUTO_ACKNOWLEDGE);
-			TopicSubscriber subscriber = session.createSubscriber(topic);
-			subscriber.setMessageListener(this);
-			connect.start();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	@Override
-	public void ejbRemove() throws EJBException {
-		try {
-			if (session != null)
-				session.close();
-			if (connect != null)
-				connect.close();
-		} catch (JMSException e) {
-			e.printStackTrace();
-		}
-	}
-
-	@Override
-	public void setMessageDrivenContext(MessageDrivenContext context) throws EJBException {
-
 	}
 }
