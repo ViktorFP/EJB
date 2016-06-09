@@ -44,7 +44,7 @@ public class Reservation{
 	
 	public List<ResComponent> getResComponents(String code, String componentTypeCode) {
 		List<ResComponent>components=new ArrayList<ResComponent>();
-		if(this.code.equals(code)){
+		if(this.code!=null && this.code.equals(code)){
 			for(ResComponent c:resComponents){
 				if(c.getComponentTypeCode().equals(componentTypeCode)){
 					components.add(c);

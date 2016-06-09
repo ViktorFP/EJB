@@ -39,7 +39,6 @@ public class JSMServlet extends HttpServlet {
 			throws ServletException, IOException {
 		QueueConnection queueConnection = null;
 		try {
-			//Context context = new InitialContext();
 			Properties properties = new Properties();
 			properties.put(Context.INITIAL_CONTEXT_FACTORY, "org.jnp.interfaces.NamingContextFactory");
 			properties.put(Context.PROVIDER_URL, "localhost:1099");
